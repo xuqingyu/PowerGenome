@@ -6,7 +6,7 @@ Contains the two columns `case_id` and `case_description`, which are a short ID 
 
 ## scenario_definitions_fn
 
-Starts with mandatory columns `case_id`, which should use `case_id` from the file `case_id_description.csv` as a foreign key, and `year`, which should match the `model_year` values from the settings file. All other columns are user-defined names that refer to the types of parameters in the settings file that will being changed across cases. The values in each column are also user-defined strings describing the scenario (e.g. "high", "mid", "low").
+Starts with mandatory columns `case_id`, which should use `case_id` from the file `case_id_description.csv` as a foreign key, and `year`, which should match the `model_year` values from the settings file. Every `case_id` should have a row for each value of `year` - make sure that the number of rows is equal to the number of unique case ids multiplied by the number of model years. All other columns are user-defined names that refer to the types of parameters in the settings file that will being changed across cases. The values in each column are also user-defined strings describing the scenario (e.g. "high", "mid", "low").
 
 The column names and values in each column are used in the settings parameter `settings_management` to define how the default settings values should be changed across each case.
 
