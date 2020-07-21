@@ -15,7 +15,7 @@ description: Integer values. The final year in each planning period. Can be cons
 
 type: list
 
-description: Integer values. The first year in each planning period. These are combined with the values from `model_year` to define the range of years for each planning period. Cost values (capex, fuel cost, etc) are the average of values from all years within a planning period.
+description: Integer values. The first year in each planning period. These are combined with the values from [model_year](#model_year) to define the range of years for each planning period. Cost values (capex, fuel cost, etc) are the average of values from all years within a planning period.
 
 ### input_folder
 
@@ -33,21 +33,21 @@ description: Pointer to a csv file with columns `case_id` and `case_description`
 
 type: str
 
-description: Pointer to a csv file that starts with mandatory columns `case_id`, which should use `case_id` from the file `case_id_description.csv` as a foreign key, and `year`, which should match the `model_year` values from the settings file. Every `case_id` should have a row for each value of `year` - make sure that the number of rows is equal to the number of unique case ids multiplied by the number of model years. All other columns are user-defined names that refer to the types of parameters in the settings file that will being changed across cases. The values in each column are also user-defined strings describing the scenario (e.g. "high", "mid", "low").
+description: Pointer to a csv file that starts with mandatory columns `case_id`, which should use `case_id` from the file `case_id_description.csv` as a foreign key, and `year`, which should match the [model_year](#model_year) values from the settings file. Every `case_id` should have a row for each value of `year` - make sure that the number of rows is equal to the number of unique case ids multiplied by the number of model years. All other columns are user-defined names that refer to the types of parameters in the settings file that will being changed across cases. The values in each column are also user-defined strings describing the scenario (e.g. "high", "mid", "low").
 
-The column names and values in each column are used in the settings parameter `settings_management` to define how the default settings values should be changed across each case.
+The column names and values in each column are used in the settings parameter [settings_management](#settings_management) to define how the default settings values should be changed across each case.
 
 ### distributed_gen_profiles_fn
 
 type: str
 
-description: Pointer to a csv file with normalized hourly generation profiles for distributed generation in all model regions listed in the settings file under `distributed_gen_method` and `distributed_gen_values`.
+description: Pointer to a csv file with normalized hourly generation profiles for distributed generation in all model regions listed in the settings file under [distributed_gen_method](#distributed_gen_method) and [distributed_gen_values](#distributed_gen_values).
 
 ### demand_response_fn
 
 type: str
 
-description: Pointer to a csv file with hourly (not normalized) profiles for demand response resources in each region/year/scenario. The top four rows are 1) the name of the DR resource (matching key values in the settings parameter `demand_response_resources`), 2) the model year, 3) the scenario name (matching names from the "demand_response" column of `scenario_definitions_fn`), and 4) the model region from `model_regions`.
+description: Pointer to a csv file with hourly (not normalized) profiles for demand response resources in each region/year/scenario. The top four rows are 1) the name of the DR resource (matching key values in the settings parameter [demand_response_resources](#demand_response_resources)), 2) the model year, 3) the scenario name (matching names from the "demand_response" column of [scenario_definitions_fn](#scenario_definitions_fn)), and 4) the model region from [model_regions](#model_regions).
 
 ### emission_policies_fn
 
@@ -91,7 +91,7 @@ description: Demand and variable generation profiles are scaled from 0-1 before 
 
 type: dict
 
-description: This is a dictionary with keys that can be any value from `model_regions`. Values define the method by which distributed generation profiles are calculated in each region. Available values are `capacity` and `fraction_load`. This method is used with `distributed_gen_values` and `distributed_gen_profiles_fn`.
+description: This is a dictionary with keys that can be any value from [model_regions](#model_regions). Values define the method by which distributed generation profiles are calculated in each region. Available values are `capacity` and `fraction_load`. This method is used with `distributed_gen_values` and `distributed_gen_profiles_fn`.
 
 ### distributed_gen_values
 
@@ -109,7 +109,7 @@ description: Distribution level line-loss is used when subtracting distributed g
 
 type: dict
 
-description: This nested dictionary has top-level keys of model years from `model_year`. The second level is names of demand response resources. Below the name are they keys:
+description: This nested dictionary has top-level keys of model years from [model_year](#model_year). The second level is names of demand response resources. Below the name are they keys:
 
 - `fraction_shiftable` (float)
 - `parameter_values` (dict) with key: value pairs for specific columns in the GenX file `Generators_data.csv`.
@@ -160,30 +160,30 @@ description: The generator size (MW) below which hydroelectric units are conside
 
 type: list(str)
 
-description: Regions from `model_regions` that will have hydroelectric generators split into small and conventional. Regions not listed here will not have small hydro split out.
+description: Regions from [model_regions](#model_regions) that will have hydroelectric generators split into small and conventional. Regions not listed here will not have small hydro split out.
 
 ### model_regions
 
 type: list(str)
 
-description: The names of model regions that will be used in output files. These can either be single IPM regions or the name assigned to a group of (one or more) IPM regions in `region_aggregations`.
+description: The names of model regions that will be used in output files. These can either be single IPM regions or the name assigned to a group of (one or more) IPM regions in [region_aggregations](#region_aggregations).
 
 ### region_aggregations
 
 type: dict(list(str))
 
-description: A dictionary with list values, used to aggregate IPM regions into groups. The keys, which are names of the aggregated regions, should be used in `model_regions`. These region names should also be used in the following parameters:
+description: A dictionary with list values, used to aggregate IPM regions into groups. The keys, which are names of the aggregated regions, should be used in [model_regions](#model_regions). These region names should also be used in the following parameters:
 
-- `regional_no_grouping`
-- `alt_num_clusters`
-- `regional_tag_values`
-- `new_gen_not_available`
-- `new_wind_solar_regional_bins` (depreciated)
-- `cost_multiplier_region_map`
-- `load_region_map`
-- `future_load_region_map`
-- `alt_growth_rate`
-- `aeo_fuel_region_map`
+- [regional_no_grouping](#regional_no_grouping)
+- [alt_num_clusters](#alt_num_clusters)
+- [regional_tag_values](#regional_tag_values)
+- [new_gen_not_available](#new_gen_not_available)
+- [new_wind_solar_regional_bins](#new_wind_solar_regional_bins) (depreciated)
+- [cost_multiplier_region_map](#cost_multiplier_region_map)
+- [load_region_map](#load_region_map)
+- [future_load_region_map](#future_load_region_map)
+- [alt_growth_rate](#alt_growth_rate)
+- [aeo_fuel_region_map](#aeo_fuel_region_map)
 
 ### cluster_method
 
@@ -201,7 +201,7 @@ description: The default number of clusters that resources will be split into in
 
 type: dict
 
-description: A nested dictionary with keys from `model_regions`, and values that are a key: value pair of the resource name (from EIA) and the number of clusters to create within that region. This parameter lets you set a different number of clusters for a resource within a specific region. You can specify a value of 0 to drop a resource from within a region, which is useful when only a few generators exist and they have extremely high heat rates according to EIA data.
+description: A nested dictionary with keys from [model_regions](#model_regions), and values that are a key: value pair of the resource name (from EIA) and the number of clusters to create within that region. This parameter lets you set a different number of clusters for a resource within a specific region. You can specify a value of 0 to drop a resource from within a region, which is useful when only a few generators exist and they have extremely high heat rates according to EIA data.
 
 ### alt_cluster_method
 
@@ -213,7 +213,7 @@ description: Not currently in use. Designed to specify different algorithms for 
 
 type: bool
 
-description: If `True`, group different technologies together as specified in `tech_groups`. This can be used to combine multiple small capacity technologies that serve a similar purpose or have similar fuel inputs.
+description: If `True`, group different technologies together as specified in [tech_groups](#tech_groups). This can be used to combine multiple small capacity technologies that serve a similar purpose or have similar fuel inputs.
 
 ### tech_groups
 
@@ -231,7 +231,7 @@ description: ???
 
 type: list
 
-description: (Not used anymore, fix in code.) Existing technologies that should have their capacity discounted by their average capacity factor (calculated using generation data from `capacity_factor_default_year_filter`).
+description: (Not used anymore, fix in code.) Existing technologies that should have their capacity discounted by their average capacity factor (calculated using generation data from [capacity_factor_default_year_filter](#capacity_factor_default_year_filter)).
 
 ### capacity_factor_default_year_filter
 
@@ -261,4 +261,10 @@ description: Keys are EIA technology names, values are the maximum age of a gene
 
 type: list
 
-description: This parameter was designed specifically for GenX outputs. The file `Generators_data.csv` has several columns
+description: This parameter was designed specifically for GenX outputs, and the items of this list each correspond to a column in `Generators_data.csv`.
+
+### default_model_tag
+
+type: Union(int, float, str)
+
+description: This is the default value for every row of the columns specified in [model_tag_names](#model_tag_names).
