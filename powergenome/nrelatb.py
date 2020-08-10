@@ -221,9 +221,9 @@ def atb_fixed_var_om_existing(results, atb_costs_df, atb_hr_df, settings):
             existing_hr = 1
             new_build_hr = 1
 
-        if ("Natural Gas Fired" in eia_tech or "Coal" in eia_tech) and settings[
-            "use_nems_coal_ng_om"
-        ]:
+        if ("Natural Gas Fired" in eia_tech or "Coal" in eia_tech) and settings.get(
+            "use_nems_coal_ng_om", True
+        ):
             # Change CC and CT O&M to EIA NEMS values, which are much higher for CCs and
             # lower for CTs than a heat rate & linear mulitpler correction to the ATB
             # values.
@@ -615,7 +615,7 @@ def atb_new_generators(atb_costs, atb_hr, settings):
     # Add user-defined technologies
     # This should probably be separate from ATB techs, and the regional cost multipliers
     # should be its own function.
-    if settings["additional_technologies_fn"] is not None:
+    if settings.get("additional_technologies_fn"):
         if isinstance(settings["additional_new_gen"], list):
             # user_costs, user_hr = load_user_defined_techs(settings)
             user_tech = load_user_defined_techs(settings)
@@ -630,7 +630,7 @@ def atb_new_generators(atb_costs, atb_hr, settings):
                 " were specified in the settings file."
             )
 
-    if settings["modified_atb_new_gen"] is not None:
+    if settings.get("modified_atb_new_gen"):
         modified_gens = add_modified_atb_generators(
             settings, atb_costs_hr, model_year_range
         )
@@ -786,8 +786,8 @@ def atb_new_generators(atb_costs, atb_hr, settings):
         _df = add_extra_wind_solar_rows(_df, region, settings)
 
         if (
-            settings["new_gen_not_available"] is not None
-            and region in settings["new_gen_not_available"].keys()
+            settings.get("new_gen_not_available")
+            and region in settings.get("new_gen_not_available", {}).keys()
         ):
             techs = settings["new_gen_not_available"][region]
             for tech in techs:

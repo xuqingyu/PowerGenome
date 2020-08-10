@@ -1334,7 +1334,10 @@ def clean_860m_sheet(eia_860m, sheet_name, settings):
 
     if sheet_name == "Planned":
         df = df.loc[
-            df["operational_status_code"].isin(settings["proposed_status_included"]), :
+            df["operational_status_code"].isin(
+                settings.get("proposed_status_included", [])
+            ),
+            :,
         ]
 
     return df
@@ -1673,7 +1676,7 @@ def add_fuel_labels(df, fuel_prices, settings):
                     "Fuel",
                 ] = fuel_name
 
-    for ccs_tech, ccs_fuel in settings["ccs_fuel_map"].items():
+    for ccs_tech, ccs_fuel in settings.get("ccs_fuel_map", {}).items():
         scenario = settings["aeo_fuel_scenarios"][ccs_fuel.split("_")[0]]
         for aeo_region, model_regions in settings["aeo_fuel_region_map"].items():
             ccs_fuel_name = ("_").join([aeo_region, scenario, ccs_fuel])
