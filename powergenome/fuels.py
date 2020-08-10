@@ -2,6 +2,7 @@
 Load fuel prices needed for the model
 """
 
+from powergenome.external_data import logger
 import pandas as pd
 
 
@@ -71,6 +72,7 @@ def adjust_ccs_fuels(ccs_fuel_row, settings):
 def add_carbon_tax(fuel_df, settings):
 
     if "carbon_tax" not in settings.keys():
+        logger.info("No carbon tax is applied in this scenario.")
         ctax = 0
     else:
         ctax = settings["carbon_tax"]
