@@ -2,6 +2,7 @@
 
 import logging
 import pandas as pd
+from pathlib import Path
 
 from powergenome.util import snake_case_col
 
