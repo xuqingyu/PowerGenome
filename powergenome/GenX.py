@@ -38,6 +38,9 @@ COL_ROUND_VALUES = {
     "Line_Max_Reinforcement_MW": 0,
     "distance_miles": 1,
     "distance_km": 1,
+    "Max_DSM_delay": 0,
+    "Up_time": 0,
+    "Down_time":0
 }
 
 
